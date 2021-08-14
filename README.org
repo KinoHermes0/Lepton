@@ -6,7 +6,7 @@
 
 *Table of Contents*
 :CONTENTS:
-- [[#lepton-old-name-proton-fix][Lepton (old name: Proton Fix)]]
+- [[#lepton-old-name-proton-fix][Lepton]]
   - [[#introduction][Introduction]]
   - [[#installation-guide][Installation Guide]]
   - [[#why-proton][WHY Proton?]]
