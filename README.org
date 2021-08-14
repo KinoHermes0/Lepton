@@ -1,4 +1,4 @@
-* Lepton (old name: Proton Fix)
+* Lepton 
   :PROPERTIES:
   :TOC:      :include all
   :END:
