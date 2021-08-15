@@ -85,7 +85,7 @@ This is my personal fork, for the original go to https://github.com/black7375/Fi
 
    Linux, mac users:
    #+BEGIN_SRC bash
-   bash -c "$(curl -fsSL https://raw.githubusercontent.com/black7375/Firefox-UI-Fix/master/install.sh)"
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/KinoHermes0/Lepton/master/install.sh)"
    #+END_SRC
 
    Windows users: Run powershell as administrator
@@ -111,8 +111,8 @@ This is my personal fork, for the original go to https://github.com/black7375/Fi
   4. Restart Firefox
      - Click the =Clear startup cache...= at the top of =about:support=
 
-  If you prefer Photon, see [[https://github.com/black7375/Firefox-UI-Fix/tree/photon-style][Lepton's photon-style]].\\
-  If you prefer Proton, see [[https://github.com/black7375/Firefox-UI-Fix/tree/proton-style][Lepton's proton-style]].
+  If you prefer Photon, see [[https://github.com/KinoHermes0/Lepton/tree/photon-style][Lepton's photon-style]].\\
+  If you prefer Proton, see [[https://github.com/KinoHermes0/Lepton/tree/proton-style][Lepton's proton-style]].
 
 
 ** WHY Proton?
