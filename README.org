@@ -1,3 +1,5 @@
+This is my personal fork, for the original go to https://github.com/black7375/Firefox-UI-Fix
+
 * Lepton 
   :PROPERTIES:
   :TOC:      :include all
