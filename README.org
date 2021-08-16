@@ -1,4 +1,6 @@
-* Lepton (old name: Proton Fix)
+This is my personal fork, for the original go to https://github.com/black7375/Firefox-UI-Fix
+
+* Lepton 
   :PROPERTIES:
   :TOC:      :include all
   :END:
@@ -6,7 +8,7 @@
 
 *Table of Contents*
 :CONTENTS:
-- [[#lepton-old-name-proton-fix][Lepton (old name: Proton Fix)]]
+- [[#lepton-old-name-proton-fix][Lepton]]
   - [[#introduction][Introduction]]
   - [[#installation-guide][Installation Guide]]
   - [[#why-proton][WHY Proton?]]
