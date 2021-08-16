@@ -1,4 +1,4 @@
-* Lepton (old name: Proton Fix) - Photon Stlyed
+* Lepton - Photon Stlyed
   :PROPERTIES:
   :TOC:      :include all
   :END:
@@ -6,7 +6,7 @@
 
 *Table of Contents*
 :CONTENTS:
-- [[#lepton-old-name-proton-fix---photon-stlyed][Lepton (old name: Proton Fix) - Photon Stlyed]]
+- [[#lepton-old-name-proton-fix---photon-stlyed][Lepton - Photon Stlyed]]
   - [[#introduction][Introduction]]
   - [[#installation-guide][Installation Guide]]
   - [[#why-proton][WHY Proton?]]
