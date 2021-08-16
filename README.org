@@ -1,4 +1,4 @@
-* Lepton (old name: Proton Fix)
+* Lepton - Proton Style
   :PROPERTIES:
   :TOC:      :include all
   :END:
@@ -6,7 +6,7 @@
 
 *Table of Contents*
 :CONTENTS:
-- [[#lepton-old-name-proton-fix][Lepton (old name: Proton Fix)]]
+- [[#lepton-old-name-proton-fix][Lepton - Proton Style]]
   - [[#introduction][Introduction]]
   - [[#installation-guide][Installation Guide]]
   - [[#why-proton][WHY Proton?]]
