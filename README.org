@@ -1,4 +1,4 @@
-* Lepton(old name: Proton Fix)
+* Lepton
   [[https://wiki.mozilla.org/Firefox/Proton][proton]] is firefox's new design. \\
   I want to fix some flaws.
 
