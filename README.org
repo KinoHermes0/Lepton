@@ -1,4 +1,4 @@
-This is my personal fork, for the original go to https://github.com/black7375/Firefox-UI-Fix
+This is my personal fork, for the original go [[https://github.com/black7375/Firefox-UI-Fix][here]].
 
 * Lepton 
   :PROPERTIES:
