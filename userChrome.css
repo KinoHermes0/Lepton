@@ -23,6 +23,14 @@
     border-radius: 4px;
   }
 
+  /*= Icon Fill Color ========================================================*/
+  :root:-moz-lwtheme {
+    /* Auto create --lwt-toolbarbutton-icon-fill-attention, fix for nightly default theme
+       Default Color: rgb(0,97,224) -> rgb(0, 120, 215) for more light
+     */
+    --lwt-toolbarbutton-icon-fill-attention: var(--button-primary-bgcolor, rgb(0, 120, 215));
+  }
+
   /*= Light Weight Theme =====================================================*/
   /* Header Image */
   :root[lwtheme-image] {
@@ -294,8 +302,6 @@
       --card-outline-color: var(--grey-60);
 
       --dialog-warning-text-color: var(--red-40);
-
-      scrollbar-color: rgba(249,249,250,.4) rgba(20,20,25,.3);
     }
   }
 
@@ -445,7 +451,7 @@
   /*= Root - Reduce Padding ==================================================*/
   :root {
     /* Tab Bar */
-    --proton-tab-block-margin: 2px !important; /* Original: 4px */
+    --proton-tab-block-margin: 2px !important; /* Original: 4px, Legacy */
     --tab-block-margin:        2px !important; /* New version of --proton-tab-block-margin */
     --inline-tab-padding:      6px !important; /* Original: 8px */
 
@@ -675,7 +681,8 @@
   }
 
   @supports not -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
-    :root:not([uidensity="touch"]) .menu-text, .menu-iconic-text {
+    :root:not([uidensity="touch"]) .menu-text,
+    :root:not([uidensity="touch"]) .menu-iconic-text {
       padding-inline-end: 0 !important; /* Original: 2px */
     }
     :root:not([uidensity="touch"]) .menupopup-arrowscrollbox {
@@ -690,11 +697,7 @@
   }
 
   /* Arrow Icon Align to Right */
-  .subviewbutton.subviewbutton-nav,
-  .bookmark-item.subviewbutton {
-    padding-inline-end: 0 !important;
-  }
-  .bookmark-item.subviewbutton {
+  .bookmark-item.subviewbutton > .menu-right {
     margin-inline-end: 0 !important;
   }
 
@@ -704,7 +707,7 @@
     --bookmark-seperator-margin: 1px 0.5em;
   }
   :root[uidensity="compact"] {
-    --bookmark-menu-padding: 2px;
+    --bookmark-menu-padding: 1px;
     --bookmark-seperator-margin: 0px 0.5em;
   }
 
@@ -881,7 +884,7 @@
       content: "" !important;
     }
   }
-  @media not (-moz-gtk-csd-available) {
+  @media not all and (-moz-gtk-csd-available) {
     :root:not([customizing="true"]) tab[visuallyselected] > stack::before,
     :root:not([customizing="true"]) tab[visuallyselected] > stack::after {
       content: "" !important;
@@ -1237,8 +1240,8 @@
   #appMenu-proton-update-banner::before {
     display: -moz-inline-box;
     margin-inline-end: var(--arrowpanel-menuicon-padding);
-    width:  16px !important;
-    height: 16px !important;
+    width:  16px;
+    height: 16px;
   }
   #appMenu-proton-update-banner {
     margin-bottom: 2px !important;
@@ -1368,8 +1371,14 @@
   }
 
   /* Default */
-  #fxa-menu-avatar {
-    display: -moz-inline-box !important;
+  #fxa-manage-account-button::before {
+    content: '';
+    display: -moz-inline-box;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: 32px;
+    background-image: var(--avatar-image-url);
     margin-inline-end: var(--arrowpanel-menuicon-padding);
   }
 
@@ -1415,10 +1424,12 @@
   #PanelUI-sign-out-separator {
     display: none;
   }
-  .pageAction-sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target[clientType=""] {
+  .pageAction-sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target[clientType=""], /* Legacy */
+  .sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target[clientType=""] {
     list-style-image: url(./icons/send-to-device.svg);
   }
-  .pageAction-sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target:not([clientType]) {
+  .pageAction-sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target:not([clientType]), /* Legacy */
+  .sendToDevice-device.subviewbutton.sync-menuitem.sendtab-target:not([clientType]) {
     list-style-image: url(chrome://global/skin/icons/settings.svg);
   }
 
@@ -1582,6 +1593,24 @@
     --menuitem-image: url(chrome://browser/skin/bookmarks-toolbar.svg);
   }
 
+  /*= identity-popup =========================================================*/
+  #identity-popup-clear-sitedata-button,
+  #identity-popup-more-info {
+    padding-inline: 5px !important;
+  }
+
+  #identity-popup-securityView-body {
+    margin-inline-start: 32px !important; /* Original: 10px */
+  }
+
+  #identity-popup-clear-sitedata-button {
+    list-style-image: url(./icons/broom.svg);
+  }
+
+  #identity-popup-more-info {
+    list-style-image: url(chrome://global/skin/icons/info.svg);
+  }
+
   /** Context Menu - Icons ****************************************************/
   /*= Layout =================================================================*/
   menupopup menuitem:not([type="checkbox"], [type="radio"]),
@@ -1592,6 +1621,7 @@
   /* Icon */
   :not(menu, #ContentSelectDropdown) > menupopup > menuitem:not(.menuitem-iconic, .in-menulist, [type="checkbox"], [checked="true"]),
   :not(menu, #ContentSelectDropdown) > menupopup > menu:not(.menu-iconic, .in-menulist, [type="checkbox"], [checked="true"]),
+  menuitem.openintabs-menuitem.subviewbutton,
   #blockedPopupDontShowMessage {
     /* Color */
     -moz-context-properties: fill, fill-opacity !important;
@@ -1652,7 +1682,6 @@
     :root {
       --context-menu-background-padding: 1em;
       --menu-background-padding-default: calc(var(--context-menu-background-padding) + var(--context-menu-text-padding));
-      --bookmark-menu-margin: 2px;
     }
 
     :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup > menuitem:not(.menuitem-iconic, [type="checkbox"], [checked="true"], .in-menulist),
@@ -1661,10 +1690,11 @@
       padding-inline-start: var(--menu-background-padding-default) !important;
       margin-left: 0 !important;
     }
-    menupopup:is(#BMB_bookmarksPopup) > menuitem:not(.menuitem-iconic),
-    menupopup:is(#BMB_bookmarksPopup) > menu:not(.menu-iconic) {
-      padding-inline-start: calc(var(--menu-background-padding-default) - var(--bookmark-menu-margin)) !important;
-      margin-left: var(--bookmark-menu-margin) !important;
+    menupopup:is(#BMB_bookmarksPopup, [placespopup="true"]) > menuitem:not(.menuitem-iconic, [disabled="true"]),
+    menupopup:is(#BMB_bookmarksPopup, [placespopup="true"]) > menu:not(.menu-iconic) {
+      margin-inline: var(--arrowpanel-menuicon-padding) !important;
+      padding-inline-start: calc(var(--menu-background-padding-default) - var(--arrowpanel-menuicon-padding)) !important;
+      background-position: left calc(var(--arrowpanel-menuitem-padding) + 1px) center !important;
     }
   }
 
@@ -1702,7 +1732,7 @@
 
   #context_reloadTab,
   #context_reloadSelectedTabs {
-    --menuitem-image: url(chrome://browser/skin/reload.svg);
+    /* --menuitem-image: url("chrome://global/skin/icons/reload.svg"); */
   }
   #context_toggleMuteTab,
   #context_toggleMuteSelectedTabs {
@@ -1735,7 +1765,9 @@
   #context_sendTabToDevice {
     --menuitem-image: url(./icons/send-to-device.svg);
   }
-  #context_shareTabURL { /* At windows */
+
+  #context_sendTabToDevice:is([disabled="true"]) + #context_shareTabURL, /* Legacy */
+  #context_sendTabToDevice:is([disabled="true"]) + menuitem.share-tab-url-item { /* At windows */
     --menuitem-image: url(./icons/share.svg);
   }
   #context_reopenInContainer {
