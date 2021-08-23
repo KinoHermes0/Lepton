@@ -6,7 +6,7 @@
   }
   @media not all and ((-moz-os-version: windows-win7) or  (-moz-os-version: windows-win8)) { /*  Level 4  */
     :root[lwtheme-mozlightdark]:not([lwthemetextcolor="bright"]) #navigator-toolbox {
-      background-color: var(--lwt-accent-color);
+      background-color: var(--lwt-accent-color) !important;
     }
   }
 
@@ -306,7 +306,7 @@
   }
 
    /*== Menu color ===========================================================*/
-  menupopup {
+   html#main-window menupopup {
     /* is same as toolbar color https://github.com/mozilla/gecko-dev/blob/master/toolkit/themes/windows/global/global.css#L17-L67 */
     --menu-color: var(--arrowpanel-color, var(--in-content-page-color)) !important;
     --menu-background-color: var(--arrowpanel-background, var(--in-content-button-background)) !important;
@@ -318,15 +318,36 @@
     --menuitem-disabled-hover-background-color: color-mix(in srgb, var(--menuitem-hover-background-color) 40%, transparent) !important;
   }
 
+  @media not all and (-moz-gtk-csd-available) {
+    window:is(#bookmarksPanel, #history-panel)[lwt-sidebar="true"] menupopup {
+      --panel-color: var(--lwt-sidebar-text-color, var(--menu-color)) !important;
+      --panel-background: var(--lwt-sidebar-background-color, var(--menu-background-color)) !important;
+    }
+    window:is(#bookmarksPanel, #history-panel)[lwt-sidebar="true"] menu[_moz-menuactive="true"]:not([disabled="true"]),
+    window:is(#bookmarksPanel, #history-panel)[lwt-sidebar="true"] menuitem[_moz-menuactive="true"]:not([disabled="true"]) {
+      --menuitem-hover-background-color: color-mix(in srgb, currentColor 17%, transparent); /* Looks like toolbar button */
+      /* or var(--lwt-sidebar-highlight-background-color)
+         If this value is used, unset is required in the default theme.
+      */
+    }
+  }
+
   /* Fallback background */
   menupopup:not(.cui-widget-panel.cui-widget-panelview, [placespopup="true"]) {
     background-color: var(--lwt-accent-color, var(--in-content-page-background)) !important;
   }
 
   /* Default theme color preservation */
-  :root[lwtheme-mozlightdark] menupopup {
-    --menu-color: var(--toolbar-color) !important;
-    --menu-background-color: var(--toolbar-bgcolor) !important;
+  :root[lwtheme-mozlightdark] menupopup:not(#BMB_bookmarksPopup, [placespopup="true"]) {
+    --menu-color: var(--toolbar-color, var(--in-content-page-color)) !important;
+    --arrowpanel-background: var(--toolbar-bgcolor, var(--in-content-button-background)) !important; /* --menu-background-color */
+  }
+  @media not all and (-moz-gtk-csd-available) {
+    window:is(#bookmarksPanel, #history-panel)[style*="--newtab-background-color: rgba(249, 249, 251, 1);"] menupopup, /* Default Light Mode */
+    window:is(#bookmarksPanel, #history-panel)[style*="--newtab-background-color: rgba(43, 42, 51, 1);"]    menupopup { /* Default Dark Mode */
+      --panel-color: var(--menu-color) !important;
+      --panel-background: var(--menu-background-color) !important;
+    }
   }
 
   /* Fully Dark Mode **********************************************************/
@@ -1374,8 +1395,8 @@
   #fxa-manage-account-button::before {
     content: '';
     display: -moz-inline-box;
-    width: 32px;
-    height: 32px;
+    width: 32px !important;
+    height: 32px !important;
     border-radius: 50%;
     background-size: 32px;
     background-image: var(--avatar-image-url);
@@ -1621,7 +1642,6 @@
   /* Icon */
   :not(menu, #ContentSelectDropdown) > menupopup > menuitem:not(.menuitem-iconic, .in-menulist, [type="checkbox"], [checked="true"]),
   :not(menu, #ContentSelectDropdown) > menupopup > menu:not(.menu-iconic, .in-menulist, [type="checkbox"], [checked="true"]),
-  menuitem.openintabs-menuitem.subviewbutton,
   #blockedPopupDontShowMessage {
     /* Color */
     -moz-context-properties: fill, fill-opacity !important;
@@ -2191,7 +2211,8 @@
     --menuitem-image: url(chrome://browser/skin/bookmark-star-on-tray.svg);
   }
 
-  menupopup[context="placesContext"]  > .openintabs-menuitem {
+  menupopup[context="placesContext"]  > .openintabs-menuitem,
+  menuitem.openintabs-menuitem.subviewbutton {
     --menuitem-image: url(./icons/movetowindow-16.svg);
   }
 
