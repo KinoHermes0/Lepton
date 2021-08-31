@@ -493,10 +493,12 @@
         --color-inverse-bg: var(--in-content-page-color) !important;
         --color-inverse: var(--in-content-page-background) !important;
         --color-text: var(--in-content-page-color) !important;
+        --color-moz-text: var(--in-content-page-color) !important;
+        --color-moz-heading: var(--in-content-page-color) !important;
         --color-text-light: var(--in-content-deemphasized-text) !important;
         --color-link: var(--in-content-link-color) !important;
-        --color-success: var(--green-60) !important;
-        --color-warning: var(--yellow-60) !important;
+        --color-success: var(--green-70) !important;
+        --color-warning: var(--yellow-70) !important;
         --color-error: var(--red-60) !important;
         --color-error-hover: var(--red-50) !important;
         --color-moz-heading: #fff;
@@ -557,7 +559,12 @@
       .mzp-c-menu-item-icon,
       .mzp-c-menu-button-close,
       .topic-article--icon,
-      .card--topic > .card--icon {
+      .card--topic > .card--icon,
+      .mzp-c-details .is-summary button::before,
+      details .is-summary button::before,
+      summary::before,
+      .icon-button > button,
+      .search-button {
         filter: invert(95%) !important;
       }
 
@@ -581,7 +588,7 @@
 
       @media screen and (min-width: 768px) {
         .mzp-c-menu-panel {
-          box-shadow: box-shadow: 0 16px 16px -16px rgba(255,255,255,.3) !important;
+          box-shadow: 0 16px 16px -16px rgba(255,255,255,.3) !important;
         }
       }
       .card--product,

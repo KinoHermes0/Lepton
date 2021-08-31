@@ -23,6 +23,18 @@
     border-radius: 4px;
   }
 
+  /*= Identity Poup Icon Crop ================================================*/
+  .identity-popup-security-connection.identity-button {
+    padding-block: 1px;
+  }
+
+  /*= Zoom in button's plus icon horizontal rate =============================*/
+  #customization-palette-container  #zoom-in-button > .toolbarbutton-icon,
+  #customization-panel-container  #zoom-in-button > .toolbarbutton-icon,
+  #widget-overflow-mainView #zoom-in-button > .toolbarbutton-icon {
+    padding-inline-start: 0px !important;
+  }
+
   /*= Icon Fill Color ========================================================*/
   :root:-moz-lwtheme {
     /* Auto create --lwt-toolbarbutton-icon-fill-attention, fix for nightly default theme
@@ -338,7 +350,8 @@
   }
 
   /* Default theme color preservation */
-  :root[lwtheme-mozlightdark] menupopup:not(#BMB_bookmarksPopup, [placespopup="true"]) {
+  :root[lwtheme-mozlightdark] menupopup:not(#BMB_bookmarksPopup, [placespopup="true"]),
+  :root[lwtheme-mozlightdark] menupopup:is(#goPopup, #bookmarksMenuPopup) {
     --menu-color: var(--toolbar-color, var(--in-content-page-color)) !important;
     --arrowpanel-background: var(--toolbar-bgcolor, var(--in-content-button-background)) !important; /* --menu-background-color */
   }
@@ -643,7 +656,7 @@
   :root[uidensity="compact"] #tab-notification-deck {
     --infobar-message-margin: 0 4px 2px;
   }
-  #tab-notification-deck notification-message[message-bar-type="infobar"] {
+  #tab-notification-deck notification-message[message-bar-type="infobar"]:not([style*="margin-top"]) {
     margin: var(--infobar-message-margin, 0 4px 4px) !important;
   }
 
@@ -738,6 +751,26 @@
   }
   :root:not([uidensity="touch"]) menupopup > .bookmarks-actions-menuseparator {
     margin: var(--bookmark-seperator-margin) !important;
+  }
+
+  /*= Global Menu - Set Padding ==============================================*/
+  /* Vertical Align - Center & Height: 100%  */
+  #menubar-items {
+    display: flex !important;
+  }
+
+  /* Menubar item padding */
+  :root {
+    --global-menubar-padding: 2px;
+  }
+  :root[uidensity="compact"] {
+    --global-menubar-padding: 1px;
+  }
+  :root[uidensity="touch"] {
+    --global-menubar-padding: 4px;
+  }
+  #main-menubar > menu {
+    padding-block: var(--global-menubar-padding) !important;
   }
 
   /*= Poup Panel - Reduce padding ============================================*/
