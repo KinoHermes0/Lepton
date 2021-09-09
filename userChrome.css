@@ -26,7 +26,7 @@
 
   /*= Identity Poup Icon Crop ================================================*/
   .identity-popup-security-connection.identity-button {
-    padding-block: 1px;
+    padding-block: 1px !important;
   }
 
   /*= Zoom in button's plus icon horizontal rate =============================*/
@@ -544,15 +544,16 @@
   }
 
   /* File moved or missing */
-  #downloadsListBox .download-state:not([exists]) .downloadTarget {
+  #downloadsListBox .download-state:not([exists], [state="0"]) .downloadTarget {
     text-decoration: line-through;
     text-decoration-color: color-mix(in srgb, currentColor 65%, transparent);
   }
-  #downloadsListBox .download-state:not([exists]) .downloadTypeIcon {
+  #downloadsListBox .download-state:not([exists], [state="0"]) .downloadTypeIcon {
     filter: grayscale(100%) !important;
   }
 
   /*= Cursor Types ===========================================================*/
+  #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2,
   #appMenu-zoomReduce-button2,
   #appMenu-zoomReset-button2,
   #appMenu-zoomEnlarge-button2,
@@ -567,6 +568,7 @@
   #BMB_bookmarksShowAll,
   #import-button,
   menuitem.openintabs-menuitem,
+  #downloadsListBox .downloadButton,
   #downloadsListBox .download-state[exists],
   #downloadsListBox .download-state[exists] .downloadDetails,
   #downloadsHistory {
@@ -756,24 +758,28 @@
 
   /*= URL Bar - Reduce Padding ===============================================*/
   :root:not([uidensity="touch"]) #urlbar-container,
-  #search-container {
-    padding-block: 2px; /* Original: 4px */
-    margin-inline: 5px; /* Original: 5px */
+  :root:not([uidensity="touch"]) #search-container {
+    padding-block: 3px !important; /* Original: 4px */
+    margin-inline: 5px !important; /* Original: 5px */
+  }
+  :root:not([uidensity="compact"]) #urlbar-container,
+  :root:not([uidensity="compact"]) #search-container {
+    padding-block: 2px !important;
   }
 
   /* spread menu */
   :root:not([uidensity]) .urlbarView-row {
-    padding-block: 1px; /* Original: 2px */
+    padding-block: 1px !important; /* Original: 2px */
   }
   :root[uidensity="compact"] .urlbarView-row {
-    padding-block: 0px;
+    padding-block: 0px !important;
   }
 
   :root:not([uidensity]) #urlbar .search-one-offs:not([hidden]) {
-    padding-block: 8px; /* Original: 10px */
+    padding-block: 8px !important; /* Original: 10px */
   }
   :root[uidensity="compact"] #urlbar .search-one-offs:not([hidden]) {
-    padding-block: 2px;
+    padding-block: 2px !important;
   }
 
   /*= BookMark Bar - Reduce Height ===========================================*/
@@ -869,20 +875,17 @@
 
   /*= Bookmark Menu - Reduce Padding =========================================*/
   :root {
-    --bookmark-menu-padding: 0.2em;
-    --bookmark-seperator-margin: 1px 0.5em;
+    --bookmark-menu-padding: 3px;
   }
   :root[uidensity="compact"] {
-    --bookmark-menu-padding: 1px;
-    --bookmark-seperator-margin: 0px 0.5em;
+    --bookmark-menu-padding: 1.5px;
   }
 
-  :root:not([uidensity="touch"]) menupopup > menuitem.bookmark-item,
-  :root:not([uidensity="touch"]) menupopup > menuitem.openintabs-menuitem {
+  :root:not([uidensity="touch"]) #BMB_bookmarksPopup .subviewbutton,
+  :root:not([uidensity="touch"]) #BMB_bookmarksPopup .subviewbutton,
+  :root:not([uidensity="touch"]) #PlacesToolbar menupopup[placespopup] .bookmark-item,
+  :root:not([uidensity="touch"]) #PlacesToolbar menupopup[placespopup] .openintabs-menuitem {
     padding-block: var(--bookmark-menu-padding) !important;
-  }
-  :root:not([uidensity="touch"]) menupopup > .bookmarks-actions-menuseparator {
-    margin: var(--bookmark-seperator-margin) !important;
   }
 
   /*= Global Menu - Set Padding ==============================================*/
@@ -1253,8 +1256,19 @@
     display: -moz-inline-box !important;
   }
 
-  #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab:not([visuallyselected], :hover) .tab-close-button {
+  #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab:not([visuallyselected]) .tab-close-button {
     visibility: collapse !important;
+    opacity: 0;
+
+    /* Animation - Fade out */
+    transition: opacity 0.1s var(--animation-easing-function) !important;
+  }
+  #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab:hover .tab-close-button {
+    visibility: visible !important;
+    opacity: 1;
+
+    /* Animation - Fade in */
+    transition: opacity 0.25s var(--animation-easing-function) !important;
   }
 
   /* Closed Button's icon thicker */
@@ -1313,6 +1327,9 @@
     border-radius: 10px !important;
     width: 17px !important;
     height: 17px !important;
+
+    /* Animation */
+    transition: 0.1s var(--animation-easing-function);
   }
   .tab-icon-overlay:not([sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
     /* Color */
@@ -1331,19 +1348,10 @@
     top: 0 !important;
     inset-inline-end: 0 !important;
     margin-inline-end: 5.5px !important;
-    padding: 2px 0 !important;
+    padding: 0 !important;
   }
-  .tabbrowser-tab:not([image])
-    .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-    box-sizing: content-box;
-    padding: 3px 0;
-
-    border-radius: 0 !important;
-  }
-  .tabbrowser-tab:not([image])
-    .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]):hover {
-    padding: 0;
-    border-radius: 10px !important;
+  .tabbrowser-tab:not([image]):is([soundplaying], [muted], [activemedia-blocked]) .tab-icon-image:not([pinned]) {
+    opacity: 0 !important; /* Favicon hidden */
   }
 
   /* Busy - Show */
@@ -1384,12 +1392,19 @@
   }
 
   /** PictureInPicture Tab - Show PIP Icon ************************************/
-  .tab-icon-sound[pictureinpicture]:not([pinned]) {
+  #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab[pictureinpicture]:not([pinned]) .tab-content::after,
+  #tabbrowser-tabs[closebuttons="activetab"]
+    .tabbrowser-tab[pictureinpicture]:not([pinned], :hover)
+    .tab-content::after {
+    content: "";
+  }
+  .tabbrowser-tab[pictureinpicture]:not([pinned]) .tab-content::after {
     /* Shape */
     display: -moz-inline-box !important;
     width: 14px;
     height: 14px;
-    -moz-box-ordinal-group: 2 !important;
+    background-size: 14px;
+    -moz-box-ordinal-group: 1 !important;
 
     /* Color */
     fill: currentColor;
@@ -1397,19 +1412,23 @@
     -moz-context-properties: fill;
 
     /* Icon */
-    list-style-image: url("chrome://global/skin/media/picture-in-picture-open.svg");
+    background-image: url("chrome://global/skin/media/picture-in-picture-open.svg");
   }
-  .tab-icon-sound[pictureinpicture]:not([pinned])[selected] {
+  .tabbrowser-tab[pictureinpicture]:not([pinned])[selected] .tab-content::after {
     opacity: 0.95;
   }
 
   /* Close Button's position */
   .tabbrowser-tab[pictureinpicture]:not([pinned]) .tab-close-button {
-    margin-left: 7px !important;
     -moz-box-ordinal-group: 2 !important;
   }
-  .tabbrowser-tab[pictureinpicture]:not([pinned]):hover .tab-close-button {
-    margin-left: 0px !important;
+  #tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab[pictureinpicture]:not([pinned]) .tab-close-button {
+    margin-left: 7px !important;
+  }
+  #tabbrowser-tabs:not([closebuttons="activetab"])
+    .tabbrowser-tab[pictureinpicture]:not([pinned]):hover
+    .tab-close-button {
+    margin-left: 2px !important;
   }
 
   /** Container Tab - Color line at icon's bottom *****************************/
@@ -2264,8 +2283,14 @@
 
   @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
     /* Bookmark Popup - As Arrow Panel */
-    #BMB_bookmarksPopup {
+    #BMB_bookmarksPopup,
+    #PersonalToolbar {
       --context-menu-background-padding: var(--arrowpanel-menuitem-padding);
+    }
+
+    #PersonalToolbar menupopup menuitem,
+    #PersonalToolbar menupopup menu {
+      padding-inline: calc(var(--arrowpanel-menuicon-padding) + var(--arrowpanel-menuitem-padding)) !important;
     }
 
     /* Bookmark Popup - None icon menu */
@@ -2670,6 +2695,8 @@
     #context-forward {
       --menuitem-image: url("chrome://browser/skin/forward.svg");
     }
+    #context_reloadTab,
+    #context_reloadSelectedTabs,
     #context-reload {
       --menuitem-image: url("chrome://browser/skin/reload.svg");
     }
