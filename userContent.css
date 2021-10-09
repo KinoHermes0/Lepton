@@ -14,6 +14,9 @@
         0.5
       ) !important; /* Original: #B5D3FF, Better color-mix(in srgb, #B5D3FF 70%, transparent) */
       --newtab-focus-border-selected: rgba(0, 221, 255, 0.5) !important; /* Original: #B5D3FF */
+
+      /* For Nightly */
+      --newtab-primary-action-background: var(--newtab-focus-border) !important;
     }
 
     /** Activity Stream - Web Site Icon: full size ****************************/
@@ -70,7 +73,7 @@
     }
 
     #contentSearchSettingsButton::before {
-      content: url(chrome://global/skin/icons/settings.svg) !important;
+      content: url("chrome://global/skin/icons/settings.svg") !important;
       display: -moz-inline-box;
 
       /* Color */
@@ -87,12 +90,40 @@
     #contentSearchSettingsButton {
       cursor: pointer;
     }
+
+    /*- Fix Color For Nightly ------------------------------------------------*/
+    .contentSearchSuggestionTable,
+    .contentSearchHeaderRow,
+    .contentSearchHeader {
+      color: var(--newtab-text-primary-color) !important;
+      background: var(--newtab-search-background-color) !important;
+    }
+
+    .contentSearchSuggestionTable .contentSearchSuggestionRow.selected,
+    .contentSearchSuggestionTable .contentSearchSettingsButton:hover {
+      color: var(--newtab-text-primary-color) !important;
+    }
+
+    .contentSearchSuggestionTable .contentSearchSuggestionRow.selected,
+    .contentSearchSuggestionTable .contentSearchSettingsButton:hover,
+    .contentSearchSuggestionTable .contentSearchOneOffItem.selected {
+      background: var(--newtab-element-hover-color) !important;
+    }
+
+    .contentSearchSuggestionTable .contentSearchSuggestionRow.selected:active,
+    .contentSearchSuggestionTable .contentSearchOneOffItem:active {
+      background: var(--newtab-element-active-color) !important;
+    }
+
+    .contentSearchSuggestionTable .contentSearchSuggestionRow.selected .historyIcon {
+      fill: var(--newtab-icon-secondary-color) !important;
+    }
   }
 
   /** Error Page - Restore illustrations **************************************/
   @-moz-document url-prefix("about:neterror"),
   url("about:restartrequired"), url("chrome://browser/content/aboutRestartRequired.xhtml"),
-  url("about:sessionrestore"),  url(chrome://browser/content/aboutSessionRestore.xhtml)
+  url("about:sessionrestore"),  url("chrome://browser/content/aboutSessionRestore.xhtml")
   {
     /* Illustrations Position */
     #errorPageContainer,
@@ -153,7 +184,7 @@
     }
   }
 
-  @-moz-document url("about:sessionrestore"), url(chrome://browser/content/aboutSessionRestore.xhtml)
+  @-moz-document url("about:sessionrestore"), url("chrome://browser/content/aboutSessionRestore.xhtml")
   {
     .description-wrapper {
       background-image: url("./icons/error-session-restore.svg");
@@ -571,6 +602,7 @@
       :root {
         --color-blue-06: var(--in-content-link-color) !important;
         --color-blue-07: var(--in-content-link-color-hover) !important;
+        --color-blue-09: var(--in-content-link-color-active) !important;
 
         --page-bg: var(--in-content-page-background) !important;
         --color-white: var(--in-content-page-background) !important;
@@ -584,7 +616,7 @@
         --color-text-light: var(--in-content-deemphasized-text) !important;
         --color-link: var(--in-content-link-color) !important;
         --color-success: var(--green-70) !important;
-        --color-warning: var(--yellow-70) !important;
+        --color-warning: var(--yellow-80) !important;
         --color-error: var(--red-60) !important;
         --color-error-hover: var(--red-50) !important;
         --color-moz-heading: #fff;
@@ -592,6 +624,10 @@
         --focus-shadow: 0 0 0 4px color-mix(in srgb, var(--in-content-primary-button-background) 30%, transparent),
           0 0 0 2px var(--in-content-primary-button-background-active);
       }
+      .warning {
+        --color-link: rgb(55, 255, 255) !important;
+      }
+
       body,
       #main-content,
       #instant-search-content,
